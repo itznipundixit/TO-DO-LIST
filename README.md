@@ -10,7 +10,7 @@ Getting Started
 Clone the repository to your local machine:
 
 Copy code
-git clone https://github.com/yourusername/todo-list.git
+git clone https://github.com/itznipundixit/TO-DO-LIST
 Navigate to the project directory:
 
 Copy code
