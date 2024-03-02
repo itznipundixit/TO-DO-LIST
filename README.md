@@ -9,17 +9,14 @@ Web browser (Google Chrome, Mozilla Firefox, etc.)
 Getting Started
 Clone the repository to your local machine:
 
-bash
 Copy code
 git clone https://github.com/yourusername/todo-list.git
 Navigate to the project directory:
 
-bash
 Copy code
 cd todo-list
 Open index.html in your web browser to view the to-do list:
 
-bash
 Copy code
 open index.html
 Usage
