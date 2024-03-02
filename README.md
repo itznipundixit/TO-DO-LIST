@@ -1,10 +1,10 @@
 # TO-DO-LIST
 This is a simple to-do list web application built using HTML, CSS, and JavaScript. Users can add tasks with names and delete them when completed.
 
-Features
-Add tasks with names
+# Features
+Add tasks with names    
 Delete tasks when completed
-Prerequisites
+# Prerequisites
 Web browser (Google Chrome, Mozilla Firefox, etc.)
 Getting Started
 Clone the repository to your local machine:
@@ -34,6 +34,6 @@ This project does not include automated tests. Manual testing can be performed b
 Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-License
+# License
 This project is licensed under the MIT License.
 
