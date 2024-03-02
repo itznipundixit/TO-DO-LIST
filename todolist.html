@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Todo List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .task {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .task input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  .delete-btn {
+    background-color: transparent;
+    border: none;
+    color: #ff6347;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Todo List</h1>
+  <form id="todo-form">
+    <input type="text" id="task-input" placeholder="Add new task...">
+    <button type="submit">Add Task</button>
+  </form>
+  <ul id="task-list" class="task-list">
+    <!-- Tasks will be dynamically added here -->
+  </ul>
+</div>
+<script>
+  // Load tasks from local storage when the page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => addTaskToList(task));
+  });
+
+  // Function to add a task to the list
+  function addTaskToList(taskText) {
+    const taskList = document.getElementById('task-list');
+    const taskItem = document.createElement('li');
+    taskItem.className = 'task';
+    taskItem.innerHTML = `
+      <input type="checkbox">
+      <span>${taskText}</span>
+      <button class="delete-btn">Delete</button>
+    `;
+    taskList.appendChild(taskItem);
+  }
+
+  // Function to handle form submission
+  document.getElementById('todo-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const taskInput = document.getElementById('task-input');
+    const taskText = taskInput.value.trim();
+    if (taskText !== '') {
+      addTaskToList(taskText);
+      saveTasksToLocalStorage(taskText);
+      taskInput.value = '';
+    }
+  });
+
+  // Function to save tasks to local storage
+  function saveTasksToLocalStorage(taskText) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.push(taskText);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  // Event delegation to handle task deletion
+  document.getElementById('task-list').addEventListener('click', function(event) {
+    if (event.target.classList.contains('delete-btn')) {
+      const taskText = event.target.previousElementSibling.textContent;
+      deleteTaskFromList(event.target.parentElement);
+      deleteTaskFromLocalStorage(taskText);
+    }
+  });
+
+  // Function to delete a task from the list
+  function deleteTaskFromList(taskItem) {
+    taskItem.remove();
+  }
+
+  // Function to delete a task from local storage
+  function deleteTaskFromLocalStorage(taskText) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const updatedTasks = tasks.filter(task => task !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  }
+</script>
+</body>
+</html>
